@@ -8,14 +8,18 @@ public class HealthBar : MonoBehaviour
 {
     public PlayerHealth health;
     public Image HealthBarUi;
-    public float fillamount = 0;
-    public ARPlacement Ar;
-
+    private float fillamount = 0f;
+    private float maxHealth = 0f;
+    private float currentHealth = 0f;
 
     void Update()
     {
 
-     
+        maxHealth = health.MaxHealth;
+        currentHealth = health.CurrentHealth;
+
+        fillamount = currentHealth / maxHealth;
+        HealthBarUi.fillAmount = fillamount;
      
 
         if (fillamount == 0)

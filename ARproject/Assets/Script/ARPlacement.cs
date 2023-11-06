@@ -22,10 +22,11 @@ public class ARPlacement : MonoBehaviour
     public int numberOfWeakPoints; // Number of weak points to spawn around the object.
     public float moveSpeed = 1f;
     public float rotationSpeed = 30f;
-    public int numberOfDeads = 0;
+    public int numberOfDeaths = 0;
     public int move = 0;
     private float initialYPosition; // Para armazenar a altura inicial
-
+    private Animator animator;
+    public PlayerHealth health;
     public Image PlayerHealthUI;
     
     
@@ -51,6 +52,9 @@ public class ARPlacement : MonoBehaviour
             numberOfWeakPoints = 30;
             moveSpeed = 0.4f;
         }
+
+
+        animator = spawnedObject.GetComponent<Animator>();
 
     }
 
@@ -82,13 +86,11 @@ public class ARPlacement : MonoBehaviour
             
           if (Vector3.Distance(new Vector3(spawnedObject.transform.position.x, 0f, spawnedObject.transform.position.z), new Vector3(camera.transform.position.x, 0f, camera.transform.position.z)) < 0.6f)
             {
-            
-            
-            // AQUI É PARA FAZER A CENA DA BARRA DA VDA
-              
-                SceneManager.LoadScene(2);
-              
-    
+
+                move = 1;
+                health.CurrentHealth--;
+                StartCoroutine(Wait());
+
             }
             
             CheckWallCollisions();
@@ -99,6 +101,15 @@ public class ARPlacement : MonoBehaviour
 
 
     }
+
+    IEnumerator Wait()
+    {
+
+        yield return new WaitForSeconds(3);
+        move = 0;
+
+    }
+
 
 
 

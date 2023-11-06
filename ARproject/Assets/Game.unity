@@ -176,7 +176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 1354141933}
   HealthBarUi: {fileID: 728648701}
-  fillamount: 0
 --- !u!1 &343144803
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,8 +988,9 @@ MonoBehaviour:
   MaxHealth: 0
   explosion: {fileID: 1855340746554395461, guid: 49011e57640af4346b984abcfb1cf581,
     type: 3}
-  PlayerHealthUI: {fileID: 0}
-  numberOfDeads: 0
+  c: {fileID: 1961938453}
+  PlayerHealthUI: {fileID: 728648701}
+  numberOfDeaths: 0
 --- !u!1 &1421940073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,9 +1494,10 @@ MonoBehaviour:
   numberOfWeakPoints: 12
   moveSpeed: 0.3
   rotationSpeed: 15
-  numberOfDeads: 0
+  numberOfDeaths: 0
   move: 0
-  playerHealth: {fileID: 0}
+  health: {fileID: 1354141933}
+  PlayerHealthUI: {fileID: 0}
 --- !u!4 &1961938454
 Transform:
   m_ObjectHideFlags: 0

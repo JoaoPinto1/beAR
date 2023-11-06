@@ -11,9 +11,10 @@ public class PlayerHealth : MonoBehaviour
     public float CurrentHealth;
     public float MaxHealth;
     public GameObject explosion;
-
+    public ARPlacement c;
     public Image PlayerHealthUI;
-    public int numberOfDeads;
+    public int numberOfDeaths;
+    private Animator animator;
     int difficulty = DifficultyManager.selectedDifficulty;//Get current difficulty
 
     void Start()
@@ -35,8 +36,9 @@ public class PlayerHealth : MonoBehaviour
             CurrentHealth = MaxHealth;
         }
 
-    }
+        animator = c.spawnedObject.GetComponent<Animator>();
 
+    }
 
 
  
@@ -45,10 +47,22 @@ public class PlayerHealth : MonoBehaviour
         // Check if the collision involves a game object with the tag "Bear"
         if (collision.gameObject.CompareTag("Bear"))
         {
-            // Handle the collision logic here
-            Debug.Log("Bear touched the player!");
+            // Touched the bear, bear attacks and player loses health
+            // Play the animation
+            c.move = 1;
+            animator.Play("Bear_Attack1");
+            StartCoroutine(Wait());
             CurrentHealth--;
         }
+    }
+
+
+    IEnumerator Wait()
+    {
+
+        yield return new WaitForSeconds(3);
+        c.move = 0;
+
     }
 
 
