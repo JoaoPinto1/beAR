@@ -27,7 +27,7 @@ public class ARPlacement : MonoBehaviour
     private float initialYPosition; // Para armazenar a altura inicial
     private Animator animator;
     public PlayerHealth health;
-    public Image PlayerHealthUI;
+    
     
     
     void Start()
