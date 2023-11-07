@@ -16,15 +16,18 @@ public class Shoot : MonoBehaviour
 
     public float shootForce = 700.0f;
     public NumberBullets number;
+    private bool canShoot = true;
+    public AudioSource ShootAudio;
+
 
     void Update()
     {
-        if(WeakPointsHit == exp.numberOfWeakPoints)
+        if (WeakPointsHit == exp.numberOfWeakPoints)
         {
             c.move = 1;
             // Get the Animator component attached to the GameObject
             animator = c.spawnedObject.GetComponent<Animator>();
-            
+
             // Play the animation
             animator.Play("Bear_Death");
 
@@ -34,44 +37,18 @@ public class Shoot : MonoBehaviour
         }
 
 
-
-        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && canShoot)
         {
-            
-            
-            // Get the screen position of the touch
-            Vector3 touchPos = Input.GetTouch(0).position;
+            ShootAudio.Play();
+            GameObject bullet = Instantiate(projectile, arCamera.position, arCamera.rotation) as GameObject;
+            bullet.GetComponent<Rigidbody>().AddForce(arCamera.forward * shootForce);
 
-            // Get the Camera component from the arCamera object
-            Camera arCameraComponent = arCamera.GetComponent<Camera>();
+            number.numeroDeBalas--;
 
-            // Check if the Camera component is not null
-            if (arCameraComponent != null)
+            if (number.numeroDeBalas == 0)
             {
-                // Convert the screen position to a ray
-                Ray ray = arCameraComponent.ScreenPointToRay(touchPos);
-
-                // Create a plane at the object's position (assuming the ground is at y=0)
-                Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-                number.numeroDeBalas = 19; //é para meter -- mas estou a fazer testes nao me dispara nada xD
-                float rayDistance;
-                if (groundPlane.Raycast(ray, out rayDistance))
-                {
-                    // Get the point on the plane where the ray hits
-                    Vector3 targetPosition = ray.GetPoint(rayDistance);
-
-                   
-                    // Instantiate the projectile at the touched position
-                    GameObject bullet = Instantiate(projectile, targetPosition, Quaternion.identity) as GameObject;
-
-                    
-                    // Apply force to the projectile
-                    bullet.GetComponent<Rigidbody>().AddForce(arCamera.forward * shootForce);
-                }
-            }
-            else
-            {
-                Debug.LogError("Camera component not found on arCamera object.");
+                StartCoroutine(WaitBullets());
+                canShoot = false;
             }
         }
     }
@@ -82,6 +59,15 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSeconds(5);
         c.move = 0;
         SceneManager.LoadScene(3);
+
+    }
+
+    IEnumerator WaitBullets()
+    {
+
+        yield return new WaitForSeconds(5);
+        number.numeroDeBalas = 20;
+        canShoot = true;
 
     }
 

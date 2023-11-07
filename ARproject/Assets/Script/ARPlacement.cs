@@ -21,7 +21,7 @@ public class ARPlacement : MonoBehaviour
     public GameObject weakPointPrefab;
     public int numberOfWeakPoints; // Number of weak points to spawn around the object.
     public float moveSpeed = 1f;
-    public float rotationSpeed = 30f;
+    public float rotationSpeed = 60f;
     public int numberOfDeaths = 0;
     public int move = 0;
     private float initialYPosition; // Para armazenar a altura inicial
@@ -80,11 +80,14 @@ public class ARPlacement : MonoBehaviour
             // Mova o objeto AR na direção da câmera com velocidade controlada, apenas atualizando X e Z
             spawnedObject.transform.position = newPosition + cameraDirection.normalized * moveSpeed * Time.deltaTime;
 
-            spawnedObject.transform.LookAt(new Vector3(camera.transform.position.x, spawnedObject.transform.position.y, camera.transform.position.z)); // Faz o urso olhar para a câmera
-            
+            Vector3 n = new Vector3(camera.transform.position.x, 0f, camera.transform.position.z) - new Vector3(spawnedObject.transform.position.x, 0f, spawnedObject.transform.position.z);
 
-            
-          if (Vector3.Distance(new Vector3(spawnedObject.transform.position.x, 0f, spawnedObject.transform.position.z), new Vector3(camera.transform.position.x, 0f, camera.transform.position.z)) < 0.6f)
+            Quaternion targetRotation = Quaternion.LookRotation(n);
+            spawnedObject.transform.rotation = Quaternion.Slerp(spawnedObject.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+
+
+            if (Vector3.Distance(new Vector3(spawnedObject.transform.position.x, 0f, spawnedObject.transform.position.z), new Vector3(camera.transform.position.x, 0f, camera.transform.position.z)) < 0.6f)
             {
 
                 move = 1;

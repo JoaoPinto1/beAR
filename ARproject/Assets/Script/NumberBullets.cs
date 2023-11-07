@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class NumberBullets : MonoBehaviour
 {
     public Text textoNumeroDeBalas;
@@ -17,8 +18,15 @@ public class NumberBullets : MonoBehaviour
 
     void Update()
     {
-        // Atualize o texto do objeto de texto com o número de balas
-        textoNumeroDeBalas.text = numeroDeBalas.ToString();
+        if (numeroDeBalas <= 0)
+        {
+            textoNumeroDeBalas.text = "A recarregar...";
+        }
+        else
+        {
+            // Atualize o texto do objeto de texto com o número de balas
+            textoNumeroDeBalas.text = numeroDeBalas.ToString();
+        }
 
         
     }
