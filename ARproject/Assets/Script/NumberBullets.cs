@@ -7,12 +7,24 @@ public class NumberBullets : MonoBehaviour
 {
     public Text textoNumeroDeBalas;
     public int numeroDeBalas;
-    
+    int difficulty = DifficultyManager.selectedDifficulty;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        numeroDeBalas = 20;
+        if (difficulty == 0)
+        {
+            numeroDeBalas = 20;
+        }
+        else if (difficulty == 1)
+        {
+            numeroDeBalas = 15;
+        }
+        else
+        {
+            numeroDeBalas = 10;
+        }
+
         textoNumeroDeBalas.text =  numeroDeBalas.ToString();
     }
 
@@ -20,6 +32,7 @@ public class NumberBullets : MonoBehaviour
     {
         if (numeroDeBalas <= 0)
         {
+            //Balas acabaram, tem de recarregar.
             textoNumeroDeBalas.text = "A recarregar...";
         }
         else

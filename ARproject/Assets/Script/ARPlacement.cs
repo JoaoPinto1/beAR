@@ -27,15 +27,15 @@ public class ARPlacement : MonoBehaviour
     private float initialYPosition; // Para armazenar a altura inicial
     private Animator animator;
     public PlayerHealth health;
-    
-    
-    
+    int difficulty = DifficultyManager.selectedDifficulty;
+
+
+
+
     void Start()
     {
         aRRaycastManager = FindObjectOfType<ARRaycastManager>();
         shoot.SetActive(false);
-
-        int difficulty = DifficultyManager.selectedDifficulty;
 
         if(difficulty == 0)
         {
@@ -53,9 +53,6 @@ public class ARPlacement : MonoBehaviour
             moveSpeed = 0.4f;
         }
 
-
-        animator = spawnedObject.GetComponent<Animator>();
-
     }
 
     // need to update placement indicator, placement pose and spawn 
@@ -65,7 +62,7 @@ public class ARPlacement : MonoBehaviour
         {
             ARPlaceObject();
             shoot.SetActive(true);
-
+            animator = spawnedObject.GetComponent<Animator>();
         }
 
     
@@ -90,9 +87,15 @@ public class ARPlacement : MonoBehaviour
             if (Vector3.Distance(new Vector3(spawnedObject.transform.position.x, 0f, spawnedObject.transform.position.z), new Vector3(camera.transform.position.x, 0f, camera.transform.position.z)) < 0.6f)
             {
 
-                move = 1;
+                animator.SetTrigger("AttackTrigger");
+
                 health.CurrentHealth--;
-                StartCoroutine(Wait());
+                move = 1;
+
+                animator.SetTrigger("IdleTrigger");
+
+                StartCoroutine(AttackColdown());
+
 
             }
             
@@ -105,11 +108,25 @@ public class ARPlacement : MonoBehaviour
 
     }
 
-    IEnumerator Wait()
+    IEnumerator AttackColdown()
     {
+        if (difficulty == 0)
+        {
+            yield return new WaitForSeconds(4);
+        }
+        else if (difficulty == 1)
+        {
+            yield return new WaitForSeconds(3);
+        }
+        else
+        {
+            yield return new WaitForSeconds(2);
+        }
 
-        yield return new WaitForSeconds(3);
+
+        animator.SetTrigger("NeutralTrigger");
         move = 0;
+
 
     }
 
@@ -150,11 +167,12 @@ public class ARPlacement : MonoBehaviour
 
   void UpdatePlacementPose()
     {
-  var screenCenter = camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
+        var screenCenter = camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
         aRRaycastManager.Raycast(screenCenter, hits, TrackableType.Planes);
 
         placementPoseIsValid = hits.Count > 0;
+
         if (placementPoseIsValid)
         {
             PlacementPose = hits[0].pose;
