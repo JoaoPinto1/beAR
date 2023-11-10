@@ -14,6 +14,7 @@ public class ARPlacement : MonoBehaviour
     public GameObject placementIndicator;
     public GameObject shoot;
     public GameObject spawnedObject;
+    public AudioSource FightAudio;
     private GameObject weakPoint;
     private Pose PlacementPose;
     private ARRaycastManager aRRaycastManager;
@@ -110,19 +111,8 @@ public class ARPlacement : MonoBehaviour
 
     IEnumerator AttackColdown()
     {
-        if (difficulty == 0)
-        {
-            yield return new WaitForSeconds(4);
-        }
-        else if (difficulty == 1)
-        {
-            yield return new WaitForSeconds(3);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2);
-        }
 
+        yield return new WaitForSeconds(4);
 
         animator.SetTrigger("NeutralTrigger");
         move = 0;
@@ -183,8 +173,11 @@ public class ARPlacement : MonoBehaviour
     {
         Quaternion rotation = Quaternion.Euler(PlacementPose.rotation.eulerAngles.x, PlacementPose.rotation.eulerAngles.y + 180f, PlacementPose.rotation.eulerAngles.z);
         spawnedObject = Instantiate(arObjectToSpawn, PlacementPose.position, rotation);
-        
-        initialYPosition = spawnedObject.transform.position.y; 
+
+        FightAudio.Play();
+
+        initialYPosition = spawnedObject.transform.position.y;
+
 
         float weakPointDistance = 1f;
         float maxRadius = 3f; // Maximum distance from the center where weak points can be placed.

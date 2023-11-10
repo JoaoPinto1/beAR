@@ -31,9 +31,11 @@ public class Explode : MonoBehaviour
         if (collision.transform.tag == "Weakpoint")
         {
             Destroy(collision.transform.gameObject); // destroy weakpoint
+            Destroy(gameObject); // destroy the bullet
+
             s.WeakPointsHit++;
 
-            Instantiate(explosion, collision.transform.position, collision.transform.rotation);
+            Instantiate(explosion, collision.transform.position, collision.transform.rotation); //create the explosion
 
         }
         else if (collision.transform.tag == "Bear")
@@ -43,7 +45,6 @@ public class Explode : MonoBehaviour
 
             // Update the bullet's direction to the reflection direction
             transform.forward = reflectionDirection;
-
         }
 
     }
