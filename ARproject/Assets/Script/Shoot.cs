@@ -38,8 +38,13 @@ public class Shoot : MonoBehaviour
 
         else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && canShoot)
         {
-            ShootAudio.Play();
-            GameObject bullet = Instantiate(projectile, arCamera.position, arCamera.rotation) as GameObject;
+            Camera cameraComponent = arCamera.GetComponent<Camera>();
+
+            Ray ray = cameraComponent.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            Vector3 spawnPoint = ray.origin;
+
+            GameObject bullet = Instantiate(projectile, spawnPoint, arCamera.rotation) as GameObject;
+
             bullet.GetComponent<Rigidbody>().AddForce(arCamera.forward * shootForce);
 
             number.numeroDeBalas--;
