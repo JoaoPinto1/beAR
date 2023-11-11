@@ -22,7 +22,7 @@ public class ARPlacement : MonoBehaviour
     public GameObject weakPointPrefab;
     public int numberOfWeakPoints; // Number of weak points to spawn around the object.
     public float moveSpeed = 1f;
-    public float rotationSpeed = 60f;
+    public float rotationSpeed = 40f;
     public int numberOfDeaths = 0;
     public int move = 0;
     private float initialYPosition; // Para armazenar a altura inicial
