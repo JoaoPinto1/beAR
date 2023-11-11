@@ -111,10 +111,13 @@ public class ARPlacement : MonoBehaviour
 
     IEnumerator AttackColdown()
     {
-
+        //wait 4 seconds
         yield return new WaitForSeconds(4);
 
         animator.SetTrigger("NeutralTrigger");
+
+        //wait 1 second to return to the moving animation
+        yield return new WaitForSeconds(1);
         move = 0;
 
 

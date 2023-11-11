@@ -12,8 +12,7 @@ public class Shoot : MonoBehaviour
     public Explode exp;
     private Animator animator;
     public ARPlacement c;
-    
-
+    int difficulty = DifficultyManager.selectedDifficulty;
     public float shootForce = 700.0f;
     public NumberBullets number;
     private bool canShoot = true;
@@ -66,7 +65,19 @@ public class Shoot : MonoBehaviour
     {
 
         yield return new WaitForSeconds(5);
-        number.numeroDeBalas = 20;
+
+        if (difficulty == 0)
+        {
+            number.numeroDeBalas = 20;
+        }else if(difficulty == 1)
+        {
+            number.numeroDeBalas = 15;
+        }
+        else
+        {
+            number.numeroDeBalas = 10;
+        }
+
         canShoot = true;
 
     }
