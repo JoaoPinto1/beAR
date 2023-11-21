@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class ARPlacement : MonoBehaviour
 {
     public Camera camera;
+    public Image Crosshair;
     public GameObject arObjectToSpawn;
     public GameObject placementIndicator;
     public GameObject shoot;
@@ -29,12 +31,14 @@ public class ARPlacement : MonoBehaviour
     private Animator animator;
     public PlayerHealth health;
     int difficulty = DifficultyManager.selectedDifficulty;
+    public GameObject damage;
 
 
 
 
     void Start()
     {
+        Crosshair.enabled = false;
         aRRaycastManager = FindObjectOfType<ARRaycastManager>();
         shoot.SetActive(false);
 
@@ -62,10 +66,21 @@ public class ARPlacement : MonoBehaviour
         if (spawnedObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             ARPlaceObject();
+
             shoot.SetActive(true);
             animator = spawnedObject.GetComponent<Animator>();
         }
 
+
+        if(damage.GetComponent<Image>().color.a > 0)
+        {
+            var color = damage.GetComponent<Image>().color;
+
+            color.a -= 0.01f;
+
+            damage.GetComponent<Image>().color = color;
+
+        }
     
         if (spawnedObject != null && move == 0)
         {
@@ -89,14 +104,9 @@ public class ARPlacement : MonoBehaviour
             {
 
                 animator.SetTrigger("AttackTrigger");
-
-                health.CurrentHealth--;
                 move = 1;
-
                 animator.SetTrigger("IdleTrigger");
-
                 StartCoroutine(AttackColdown());
-
 
             }
             
@@ -109,8 +119,18 @@ public class ARPlacement : MonoBehaviour
 
     }
 
+
     IEnumerator AttackColdown()
     {
+        //wait for attack animation to finish
+        yield return new WaitForSeconds(1);
+
+        var color = damage.GetComponent<Image>().color;
+        color.a = 0.8f;
+        damage.GetComponent<Image>().color = color;
+
+        health.CurrentHealth--;
+
         //wait 4 seconds
         yield return new WaitForSeconds(4);
 
@@ -176,6 +196,8 @@ public class ARPlacement : MonoBehaviour
     {
         Quaternion rotation = Quaternion.Euler(PlacementPose.rotation.eulerAngles.x, PlacementPose.rotation.eulerAngles.y + 180f, PlacementPose.rotation.eulerAngles.z);
         spawnedObject = Instantiate(arObjectToSpawn, PlacementPose.position, rotation);
+
+        Crosshair.enabled = true;
 
         FightAudio.Play();
 
