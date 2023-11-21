@@ -346,3 +346,67 @@ Received Import Request.
 Start importing Assets/Script/Shoot.cs using Guid(a33c918ac20fba24e914c322f11b4d8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6ac81ad4a5545850efe5edc2a8caf8a') in 0.003584 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 90.405549 seconds.
+  path: Assets/Game.unity
+  artifactKey: Guid(8663e65abfb0b2d47bc0bd9bf62e7148) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Game.unity using Guid(8663e65abfb0b2d47bc0bd9bf62e7148) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07e187390b5774b8839e18036f82b319') in 0.000513 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 80.779989 seconds.
+  path: Assets/Script/PlayGame.cs
+  artifactKey: Guid(9c81ea8be56eab747b494a96c437b0da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/PlayGame.cs using Guid(9c81ea8be56eab747b494a96c437b0da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86caa4c293d14801e71df9d01cc27d8b') in 0.000684 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.474852 seconds.
+  path: Assets/Script/PlayerHealth.cs
+  artifactKey: Guid(7e8060715e2ec6447b0347c163d519b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/PlayerHealth.cs using Guid(7e8060715e2ec6447b0347c163d519b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65de92d0dfaa3373e8d8d807e47e523c') in 0.000596 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.610467 seconds.
+  path: Assets/Script/DifficultyManager.cs
+  artifactKey: Guid(4c8f5d8dacb4595468d219572734c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/DifficultyManager.cs using Guid(4c8f5d8dacb4595468d219572734c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '641574fb41b0ac8e0794e2b0f951ccd3') in 0.000539 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.032003 seconds.
+  path: Assets/Script/Explode.cs
+  artifactKey: Guid(a51c25ffa33f8e442bb045c66888247d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/Explode.cs using Guid(a51c25ffa33f8e442bb045c66888247d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29beda0b68e35a601ca3e1a5de115ec0') in 0.000673 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 6.005250 seconds.
+  path: Assets/Script/BearSound.cs
+  artifactKey: Guid(037bc260cba664241b4e7cf3c77f1564) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/BearSound.cs using Guid(037bc260cba664241b4e7cf3c77f1564) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '053b5d6b3c4f0375771638977b5b3491') in 0.000477 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.156802 seconds.
+  path: Assets/Script/BearHealthBar.cs
+  artifactKey: Guid(09b098d7cad34504b898b00d32ff5346) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/BearHealthBar.cs using Guid(09b098d7cad34504b898b00d32ff5346) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3dfe0286a05d060f0b506f499632458') in 0.000498 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.321955 seconds.
+  path: Assets/Script/ARPlacement.cs
+  artifactKey: Guid(18e7cc7ec09a4634fb6a3bc68989ebe9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/ARPlacement.cs using Guid(18e7cc7ec09a4634fb6a3bc68989ebe9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff4671a9f52be2dfe110a00a107e7d1e') in 0.000484 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
