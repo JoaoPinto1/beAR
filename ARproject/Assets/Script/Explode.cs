@@ -36,7 +36,7 @@ public class Explode : MonoBehaviour
             s.WeakPointsHit++;
 
             Instantiate(explosion, collision.transform.position, collision.transform.rotation); //create the explosion
-
+            Vibration.Vibrate(250);
         }
         else if (collision.transform.tag == "Bear")
         {
