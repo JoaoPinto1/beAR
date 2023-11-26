@@ -27,18 +27,21 @@ public class ARPlacement : MonoBehaviour
     public float rotationSpeed = 40f;
     public int numberOfDeaths = 0;
     public int move = 0;
-    private float initialYPosition; // Para armazenar a altura inicial
+    private float initialYPosition; // Initial height
     private Animator animator;
     public PlayerHealth health;
     int difficulty = DifficultyManager.selectedDifficulty;
     public GameObject damage;
+    private Vector3 previousCameraPosition; // Camera previous position
+    private float totalDistance; // Total distance done by the camera
 
 
 
 
     void Start()
     {
-        Crosshair.enabled = false;
+        previousCameraPosition = camera.transform.position;
+        Crosshair.enabled = false; 
         aRRaycastManager = FindObjectOfType<ARRaycastManager>();
         shoot.SetActive(false);
 
@@ -60,7 +63,7 @@ public class ARPlacement : MonoBehaviour
 
     }
 
-    // need to update placement indicator, placement pose and spawn 
+   // need to update placement indicator, placement pose and spawn 
    void Update()
     {
         if (spawnedObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -81,12 +84,12 @@ public class ARPlacement : MonoBehaviour
             damage.GetComponent<Image>().color = color;
 
         }
-    
+
         if (spawnedObject != null && move == 0)
         {
             // Calcula a direção da câmera em relação ao objeto AR
             Vector3 cameraDirection = camera.transform.position - spawnedObject.transform.position;
-            
+
             // Mantém a altura do urso a mesma que a altura inicial
             Vector3 newPosition = new Vector3(spawnedObject.transform.position.x, initialYPosition, spawnedObject.transform.position.z);
 
@@ -100,6 +103,13 @@ public class ARPlacement : MonoBehaviour
 
 
 
+            totalDistance += Vector3.Distance(previousCameraPosition, camera.transform.position);
+
+            // Atualiza a posição anterior da câmera para a posição atual
+            previousCameraPosition = camera.transform.position;
+            PlayerPrefs.SetFloat("TotalDistance", totalDistance);
+
+
             if (Vector3.Distance(new Vector3(spawnedObject.transform.position.x, 0f, spawnedObject.transform.position.z), new Vector3(camera.transform.position.x, 0f, camera.transform.position.z)) < 0.6f)
             {
 
@@ -109,7 +119,7 @@ public class ARPlacement : MonoBehaviour
                 StartCoroutine(AttackColdown());
 
             }
-            
+
             CheckWallCollisions();
         }
 

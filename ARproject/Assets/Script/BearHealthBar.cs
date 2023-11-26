@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class BearHealthBar : MonoBehaviour
 {
     public Explode exp;
@@ -23,8 +24,9 @@ public class BearHealthBar : MonoBehaviour
 
         if (fillamount == 0)
         {
-            Time.timeScale = 1;
+            Time.timeScale = 1; 
             SceneManager.LoadScene(3);
+
         }
 
     }
