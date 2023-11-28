@@ -34,6 +34,8 @@ public class ARPlacement : MonoBehaviour
     public GameObject damage;
     private Vector3 previousCameraPosition; // Camera previous position
     private float totalDistance; // Total distance done by the camera
+    private float startTime;
+    private float elapsedTime;
 
 
 
@@ -66,6 +68,15 @@ public class ARPlacement : MonoBehaviour
    // need to update placement indicator, placement pose and spawn 
    void Update()
     {
+
+        elapsedTime = Time.time - startTime;
+        PlayerPrefs.SetFloat("TotalDistance", totalDistance);
+
+        PlayerPrefs.SetFloat("ElapsedTime", elapsedTime);
+        totalDistance += Vector3.Distance(previousCameraPosition, camera.transform.position);
+
+        previousCameraPosition = camera.transform.position;
+
         if (spawnedObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             ARPlaceObject();
@@ -100,14 +111,6 @@ public class ARPlacement : MonoBehaviour
 
             Quaternion targetRotation = Quaternion.LookRotation(n);
             spawnedObject.transform.rotation = Quaternion.Slerp(spawnedObject.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-
-
-            totalDistance += Vector3.Distance(previousCameraPosition, camera.transform.position);
-
-            // Atualiza a posição anterior da câmera para a posição atual
-            previousCameraPosition = camera.transform.position;
-            PlayerPrefs.SetFloat("TotalDistance", totalDistance);
 
 
             if (Vector3.Distance(new Vector3(spawnedObject.transform.position.x, 0f, spawnedObject.transform.position.z), new Vector3(camera.transform.position.x, 0f, camera.transform.position.z)) < 0.6f)
@@ -213,10 +216,6 @@ public class ARPlacement : MonoBehaviour
 
         initialYPosition = spawnedObject.transform.position.y;
 
-
-        float weakPointDistance = 1f;
-        float maxRadius = 3f; // Maximum distance from the center where weak points can be placed.
-
         // Get the mesh filter component from the spawned object.
         MeshFilter meshFilter = spawnedObject.GetComponent<MeshFilter>();
 
@@ -248,6 +247,9 @@ public class ARPlacement : MonoBehaviour
             // Set the spawnedObject as the parent so the weakpoints move along with it
             weakPoint.transform.parent = spawnedObject.transform;
         }
+
+        startTime = Time.time;
+
     }
 
 

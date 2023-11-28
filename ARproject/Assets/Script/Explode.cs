@@ -12,7 +12,6 @@ public class Explode : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         int difficulty = DifficultyManager.selectedDifficulty;
-        float speed = 1f;
 
         if (difficulty == 0)
         {
