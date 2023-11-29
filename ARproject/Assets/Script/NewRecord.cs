@@ -37,8 +37,8 @@ public class NewRecord : MonoBehaviour
         string formattedDistance = totalDistance.ToString("F1");
         string formattedTime = totalTime.ToString("F2");
 
-        float HighScore = PlayerPrefs.GetFloat(Time, 0f);
-        float BestDistance = PlayerPrefs.GetFloat(Distance, 0f);
+        float HighScore = PlayerPrefs.GetFloat(Time, 999f);
+        float BestDistance = PlayerPrefs.GetFloat(Distance, 999f);
 
         if (totalTime < HighScore)
         {
@@ -69,7 +69,7 @@ public class NewRecord : MonoBehaviour
         //No new record.
         else
         {
-            DistanciaTexto.text = "Distância percorrida:\n" + formattedDistance + "m";
+            DistanciaTexto.text = "\nDistância percorrida:\n" + formattedDistance + "m";
             TempoTexto.text = "Duração de jogo:\n" + formattedTime + "s";
         }
 
